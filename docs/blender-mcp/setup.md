@@ -2,6 +2,21 @@
 
 Blender と Codex デスクトップ版を使います。コマンドは、Windows のスタートメニューで「PowerShell」と検索して開いた画面に貼り付け、Enter を押します。コード欄の右上からコピーできます。
 
+!!! tip "ChatGPT と一緒に進めたいとき"
+    下の文をコピーして ChatGPT に送ると、今の画面に合わせて一つずつ案内してもらえます。
+
+    ~~~text
+    Windows を使っています。Blender MCP を設定したいです。
+    このページを読んで、初めての人向けに案内してください。
+    https://sofacandy.github.io/roblox-dev-notes/blender-mcp/setup/
+
+    まず、どこまでできているか私に聞いてください。
+    次に開く画面や入力するコマンドを一つだけ教えてください。
+    何が表示されたら成功かも教えて、私の返事を待ってください。
+    ページに未確認と書いてあることは、そのまま教えてください。
+    ページを開けなければ、必要な部分を貼るように言ってください。
+    ~~~
+
 ## 1. Blender を接続できる状態にする
 
 Blender 側には、Codex からの接続を受け付ける追加機能が必要です。このガイドで使うのは **Blender Lab の blender_mcp** です。[配布元](https://projects.blender.org/lab/blender_mcp)と[リリース一覧](https://projects.blender.org/lab/blender_mcp/releases)で、使っている Blender の版に合う案内を確認してください。

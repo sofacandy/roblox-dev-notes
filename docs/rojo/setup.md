@@ -5,6 +5,21 @@ Rojo は、パソコンで動かす本体と、Roblox Studio に入れる追加�
 !!! note "試した範囲"
     公式の Rojo v7 ガイドをもとにした手順です。この Windows 環境では Studio での接続まで通して試していません。
 
+!!! tip "ChatGPT と一緒に進めたいとき"
+    下の文をコピーして ChatGPT に送ると、今の画面に合わせて一つずつ案内してもらえます。
+
+    ~~~text
+    Windows を使っています。Rojo を設定して、Roblox Studio でコードを試したいです。
+    このページを読んで、初めての人向けに案内してください。
+    https://sofacandy.github.io/roblox-dev-notes/rojo/setup/
+
+    まず、どこまでできているか私に聞いてください。
+    次に開く画面や入力するコマンドを一つだけ教えてください。
+    何が表示されたら成功かも教えて、私の返事を待ってください。
+    ページに未確認と書いてあることは、そのまま教えてください。
+    ページを開けなければ、必要な部分を貼るように言ってください。
+    ~~~
+
 ## 1. Rojo 本体を入れる
 
 [Rojo の配布ページ](https://github.com/rojo-rbx/rojo/releases)で v7 のリリースを開き、**Assets** からパソコンに合う Windows 用の ZIP をダウンロードして展開します。一般的な Intel・AMD の64ビット PC では x86_64 版を選びます。
