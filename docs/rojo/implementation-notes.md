@@ -14,32 +14,70 @@ AI はコードを書く作業や修正を手伝います。Rojo は、パソコ
 
 技術的に変わったのは、Rojo の設定でパソコン側のファイルと Studio 側の置き場所を対応づける範囲です。初期は2つのフォルダーから始め、その範囲を徐々に広げました。ここでいう「コード全体」はゲームのスクリプトを指します。
 
-## 設定ファイルでは、どこが変わる？
+## 実際の設定を比べる
 
-Rojo の `default.project.json` では、`$path` にパソコン側のフォルダーを指定します。その項目を設定のどこに書くかで、Studio 側の置き場所が決まります。
+初めて作った Obby と、最近のプロジェクトの `default.project.json` を比べます。`$path` はパソコン側のフォルダーです。Studio 側の置き場所は、その項目を設定のどこに書くかで決まります。
 
-下は、サーバー用・クライアント用の2フォルダーから始めて、両方で使うコードも同期する場合の差分です。**仕組みを説明するための例**で、私のプロジェクトの実際の設定や、追加した順番を示すものではありません。行頭に `+` がある行が追加分です。
+| コードの種類 | 最初の Obby での置き場所 | 最近のプロジェクトでの置き場所 |
+| --- | --- | --- |
+| サーバー用 | `ServerScriptService` の直下 | `ServerScriptService → Server` |
+| クライアント用 | `StarterPlayer → StarterPlayerScripts` の直下 | `StarterPlayer → StarterPlayerScripts → Client` |
+| 両方で使うもの | この設定に共通コード用の同期先はなし | `ReplicatedStorage → Shared` |
 
-~~~diff
- {
-   "tree": {
-     "$className": "DataModel",
-+    "ReplicatedStorage": {
-+      "Shared": { "$path": "src/shared" }
-+    },
-     "ServerScriptService": {
-       "Server": { "$path": "src/server" }
-     },
-     "StarterPlayer": {
-       "StarterPlayerScripts": {
-         "Client": { "$path": "src/client" }
-       }
-     }
-   }
- }
+初期は、Studio のサービスやコンテナにフォルダーを直接つないでいました。最近は、その中に `Server`、`Client`、`Shared` という置き場所を分け、パソコン側でも `src/server`、`src/client`、`src/shared` に分けています。たとえば、サーバーとクライアントの両方で使うコードは `src/shared` に置くと、Studio の `ReplicatedStorage → Shared` に反映されます。
+
+もう一つの違いは、`$ignoreUnknownInstances: true` を親の項目に明記したことです。たとえば `ServerScriptService` では、Rojo の設定に含まれていない `Server` の隣の項目を、同期時に残す指定です。Rojo v7 では、`$path` がある項目の既定値は `false`、ない項目は `true` です。この設定例で同期元を指定している `Server`、`Client`、`Shared` の内側まで、この指定が引き継がれるわけではありません。[Rojo v7 の設定ファイル仕様](https://rojo.space/docs/v7/project-format/#instance-description)
+
+### 初期の設定（Lotus-Pond-Obby）
+
+~~~json
+{
+  "name": "Lotus-Pond-Obby",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$path": "src/ServerScriptService"
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "$path": "src/StarterPlayer/StarterPlayerScripts"
+      }
+    }
+  }
+}
 ~~~
 
-この例では、パソコンの `src/shared` に保存したコードが、Studio の **Explorer → ReplicatedStorage → Shared** に出るようになります。サーバー用・クライアント用と同じように、共通コードも手元のファイルを編集して Studio に反映できます。
+### 最近の設定（Game）
+
+~~~json
+{
+  "name": "Game",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$ignoreUnknownInstances": true,
+      "Shared": {
+        "$path": "src/shared"
+      }
+    },
+    "ServerScriptService": {
+      "$ignoreUnknownInstances": true,
+      "Server": {
+        "$path": "src/server"
+      }
+    },
+    "StarterPlayer": {
+      "$ignoreUnknownInstances": true,
+      "StarterPlayerScripts": {
+        "$ignoreUnknownInstances": true,
+        "Client": {
+          "$path": "src/client"
+        }
+      }
+    }
+  }
+}
+~~~
 
 Rojo でファイルの置き場所を決める仕組みは、[ファイルは Studio のどこに出る？](project-structure.md)で説明しています。
 
