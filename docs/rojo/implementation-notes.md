@@ -14,19 +14,46 @@ AI はコードを書く作業や修正を手伝います。Rojo は、パソコ
 
 技術的に変わったのは、Rojo の設定でパソコン側のファイルと Studio 側の置き場所を対応づける範囲です。初期は2つのフォルダーから始め、その範囲を徐々に広げました。ここでいう「コード全体」はゲームのスクリプトを指します。
 
-## 実際の設定を比べる
+## Studio の Explorer で見ると、こう変わった
 
-初めて作った Obby と、最近のプロジェクトの `default.project.json` を比べます。`$path` はパソコン側のフォルダーです。Studio 側の置き場所は、その項目を設定のどこに書くかで決まります。
+Rojo がコードを置く場所だけを抜き出しました。
 
-| コードの種類 | 最初の Obby での置き場所 | 最近のプロジェクトでの置き場所 |
-| --- | --- | --- |
-| サーバー用 | `ServerScriptService` の直下 | `ServerScriptService → Server` |
-| クライアント用 | `StarterPlayer → StarterPlayerScripts` の直下 | `StarterPlayer → StarterPlayerScripts → Client` |
-| 両方で使うもの | この設定に共通コード用の同期先はなし | `ReplicatedStorage → Shared` |
+### 最初の Obby：2か所にコードを直接置く
 
-初期は、Studio のサービスやコンテナにフォルダーを直接つないでいました。最近は、その中に `Server`、`Client`、`Shared` という置き場所を分け、パソコン側でも `src/server`、`src/client`、`src/shared` に分けています。たとえば、サーバーとクライアントの両方で使うコードは `src/shared` に置くと、Studio の `ReplicatedStorage → Shared` に反映されます。
+~~~text
+ServerScriptService
+└─ サーバー用のコード
 
-もう一つの違いは、`$ignoreUnknownInstances: true` を親の項目に明記したことです。たとえば `ServerScriptService` では、Rojo の設定に含まれていない `Server` の隣の項目を、同期時に残す指定です。Rojo v7 では、`$path` がある項目の既定値は `false`、ない項目は `true` です。この設定例で同期元を指定している `Server`、`Client`、`Shared` の内側まで、この指定が引き継がれるわけではありません。[Rojo v7 の設定ファイル仕様](https://rojo.space/docs/v7/project-format/#instance-description)
+StarterPlayer
+└─ StarterPlayerScripts
+   └─ クライアント用のコード
+~~~
+
+### 最近のプロジェクト：用途別に3つのフォルダーに分ける
+
+~~~text
+ServerScriptService
+└─ Server
+   └─ サーバー用のコード
+
+StarterPlayer
+└─ StarterPlayerScripts
+   └─ Client
+      └─ クライアント用のコード
+
+ReplicatedStorage
+└─ Shared
+   └─ サーバーとクライアントの両方で使うコード
+~~~
+
+たとえば、両方で使うコードをパソコンの `src/shared` に保存すると、Studio の `ReplicatedStorage → Shared` に反映されます。
+
+## 設定ファイルで確かめる
+
+下の `default.project.json` を読むときは、まず `$path` の行を探してください。そこにパソコン側のフォルダーが書いてあります。その行を囲んでいる名前を外側から順にたどると、上の図の Studio 側の置き場所が分かります。
+
+!!! note "Studio 側にある項目を残す設定"
+    新しい設定では、親の項目に `$ignoreUnknownInstances: true` を書いています。たとえば `ServerScriptService` では、設定に含まれていない `Server` の隣の項目を同期時に残します。`Server` の内側は別で、親の指定は引き継ぎません。既定値は、その項目に `$path` があると `false`、ないと `true` です。[Rojo v7 の設定ファイル仕様](https://rojo.space/docs/v7/project-format/#instance-description)
 
 ### 初期の設定（Lotus-Pond-Obby）
 
