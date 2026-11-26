@@ -1,10 +1,10 @@
 # Roblox Dev Notes
 
-Roblox 制作のための日本語ドキュメント。Material for MkDocs で作成しています。
+Blender を Codex につなぐ方法と、Rojo で手元のコードを Roblox Studio に反映する方法をまとめた日本語サイトです。
 
-## ローカルでプレビュー
+## 自分のパソコンでサイトを開く
 
-Python 3.12 が使える PowerShell で、リポジトリのルートから実行します。
+Python 3.12 を用意します。エクスプローラーで mkdocs.yml があるフォルダーを開き、アドレス欄に powershell と入力して Enter を押します。次のコマンドを上から1行ずつ実行します。
 
 ~~~powershell
 python -m venv .venv

@@ -1,38 +1,43 @@
-# コマンド集
+# そのまま使えるコマンド集
 
-## uv と Git を導入・確認する
+Windows のスタートメニューから **PowerShell** を開きます。必要な欄だけ使ってください。
 
-未導入のものだけインストールし、PowerShell を開き直します。
+## uv と Git を入れる { #uv-git }
+
+見つからない方だけ実行します。
 
 ~~~powershell
 winget install --id astral-sh.uv -e
 winget install --id Git.Git -e
-git --version
+~~~
+
+PowerShell を開き直し、バージョンと `uvx.exe` の場所が出るか確認します。
+
+~~~powershell
 uv --version
 uvx --version
+git --version
 (Get-Command uvx.exe -ErrorAction Stop).Source
 ~~~
 
-既定の設定ファイルを開く例です。`CODEX_HOME` を変更している場合は読み替えます。
+## Blender に届くか調べる
+
+Blender を開いたまま実行します。`TcpTestSucceeded : True` が目印です。
 
 ~~~powershell
-notepad "$env:USERPROFILE\.codex\config.toml"
-~~~
-
-## Blender とポートを確認する
-
-~~~powershell
-Get-Process blender | Select-Object Id, Path
-Get-NetTCPConnection -State Listen -LocalPort 9876 |
-    Select-Object LocalAddress, LocalPort, OwningProcess
-Get-NetTCPConnection -State Listen -LocalPort 9876 |
-    ForEach-Object { Get-Process -Id $_.OwningProcess }
 Test-NetConnection 127.0.0.1 -Port 9876
 ~~~
 
-## CLI で登録と接続を確認する
+誰がポート `9876` で接続を受け付けているか調べるときに使います。`ProcessName` に `blender` が出るか確認します。
 
-Node.js が未導入の場合は `winget install --id OpenJS.NodeJS.LTS -e` を実行し、PowerShell を開き直します。
+~~~powershell
+Get-NetTCPConnection -State Listen -LocalPort 9876 |
+    ForEach-Object { Get-Process -Id $_.OwningProcess }
+~~~
+
+## ターミナル版 Codex で試す
+
+Node.js がなければ `winget install --id OpenJS.NodeJS.LTS -e` を実行し、PowerShell を開き直します。次のコマンドは上から順に実行します。
 
 ~~~powershell
 npm.cmd install -g @openai/codex@latest
@@ -42,17 +47,11 @@ codex.cmd mcp get blender
 codex.cmd
 ~~~
 
-CLI を開いた後の入力欄で実行します。
+最後の行で Codex が開いたら、その入力欄に `/mcp` と打って Enter を押します。対応する版では `/mcp verbose` で詳細を見られます。
 
-~~~text
-/mcp
-~~~
+## 起動エラーが出るときだけ、橋渡し役を手で起動する
 
-利用中の CLI が対応していれば `/mcp verbose` でも詳細を確認できます。
-
-## stdio を手動起動して診断する
-
-通常は Codex が起動します。下記は起動エラーを調べるための手動実行例で、待機した場合は `Ctrl+C` で終了できます。
+普段は Codex が起動します。エラーを調べるときは次を PowerShell で実行します。画面が止まったように見えるときは、Codex からの入力を待っている場合があります。手動起動は `Ctrl+C` で終了できます。
 
 ~~~powershell
 $uvxPath = (Get-Command uvx.exe -ErrorAction Stop).Source

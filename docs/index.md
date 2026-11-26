@@ -1,21 +1,21 @@
 # Roblox Dev Notes
 
-Roblox 制作に使うツールの導入手順と、Windows で詰まったときの切り分けをまとめた開発ノートです。
+Roblox のゲームを作るときに使う、2つの道具の使い方をまとめました。
 
 <div class="grid cards" markdown>
 
--   **Blender MCP**
+-   **Blender を Codex から使いたい**
 
-    Codex と Blender をつなぎ、シーンを調べたり、3D アセットの試作を進めたりします。
+    「階段を作って」と頼んだり、今開いているモデルを調べたりできるようにします。
 
-    [Windows セットアップ](blender-mcp/setup.md) · [FAQ](blender-mcp/faq.md) · [活用例](blender-mcp/examples.md)
+    [Blender MCP の設定を始める](blender-mcp/setup.md) · [困ったときは](blender-mcp/faq.md)
 
--   **Rojo**
+-   **パソコンに保存したコードを Roblox Studio に反映したい**
 
-    手元の Luau ファイルを Roblox Studio に同期し、エディタと Git でコードを管理します。
+    Rojo を使うと、エディタで保存した Luau のコードを Studio で試せます。
 
-    [セットアップ](rojo/setup.md) · [プロジェクト構成](rojo/project-structure.md) · [開発ワークフロー](rojo/workflow.md)
+    [Rojo の設定を始める](rojo/setup.md) · [Studio で動かしてみる](rojo/workflow.md)
 
 </div>
 
-Blender MCP の記事では、2026年11月26日の Windows での観測結果と原因の推定を区別しています。Rojo は公式 v7 ドキュメントに沿った手順例で、Studio までの通し検証は未実施です。
+Blender MCP の記事は、2026年11月26日に Windows で試した記録をもとにしています。Rojo は公式ガイドをもとにした手順で、この環境では Studio での動作まで通して試していません。

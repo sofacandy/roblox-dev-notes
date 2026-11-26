@@ -1,32 +1,42 @@
-# Rojo セットアップ
+# Windows で Rojo を始める
 
-!!! note "実機未検証"
-    公式 v7 ドキュメントに沿った Windows 向け手順です。導入・同期の通し検証は未実施です。
+Rojo は、パソコンで動かす本体と、Roblox Studio に入れる追加機能の2つを使います。まずはテスト用に新しい場所を作ります。コマンドは、Windows のスタートメニューで「PowerShell」と検索して開いた画面に貼り付けます。
 
-## 1. Rojo CLI を用意する
+!!! note "試した範囲"
+    公式の Rojo v7 ガイドをもとにした手順です。この Windows 環境では Studio での接続まで通して試していません。
 
-[公式リリース](https://github.com/rojo-rbx/rojo/releases)から Windows と CPU に合う v7 のバイナリを取得し、展開先をユーザーの PATH に追加します。PowerShell を開き直し、使用する版を確認します。
+## 1. Rojo 本体を入れる
+
+[Rojo の配布ページ](https://github.com/rojo-rbx/rojo/releases)で v7 のリリースを開き、**Assets** からパソコンに合う Windows 用の ZIP をダウンロードして展開します。一般的な Intel・AMD の64ビット PC では x86_64 版を選びます。
+
+この案内では、`rojo.exe` があるフォルダーでコマンドを実行します。エクスプローラーでそのフォルダーを開き、上のアドレス欄に `powershell` と入力して Enter を押します。開いた画面で次を実行します。
 
 ~~~powershell
-rojo --version
+.\rojo.exe --version
 ~~~
 
-チームでツールの版をそろえる場合は、公式の [Rokit を使う手順](https://rojo.space/docs/v7/getting-started/installation/)も選べます。
+`Rojo 7` で始まるバージョンが表示されたら次に進みます。
 
-## 2. Studio プラグインを導入する
+## 2. Studio に Rojo を入れる
+
+同じ PowerShell で実行します。
 
 ~~~powershell
-rojo plugin install
+.\rojo.exe plugin install
 ~~~
 
-Roblox Studio を開き直し、プラグイン欄で Rojo が見えることを確認します。導入方法の詳細は[公式のインストール手順](https://rojo.space/docs/v7/getting-started/installation/)を参照してください。
+Roblox Studio を開き直し、上の **Plugins（プラグイン）** 欄に Rojo があるか確認します。[公式のインストール手順](https://rojo.space/docs/v7/getting-started/installation/)
 
-## 3. 新しいテストプロジェクトを同期する
+## 3. 練習用のフォルダーを作って Studio につなぐ
+
+同じ PowerShell で次の3行を上から順に実行します。
 
 ~~~powershell
-rojo init roblox-demo
+.\rojo.exe init roblox-demo
 Set-Location roblox-demo
-rojo serve
+..\rojo.exe serve
 ~~~
 
-Studio で新規のテスト用プレースを開き、Rojo プラグインの接続画面で `rojo serve` が表示したホストとポートを指定します。既定の接続先は通常 `localhost:34872` です。同期内容を確認して接続し、Explorer にプロジェクト定義どおりのインスタンスが現れるか確認します。続きは[開発ワークフロー](workflow.md)へ進んでください。[公式の新規ゲーム作成手順](https://rojo.space/docs/v7/getting-started/new-game/)
+`roblox-demo` が練習用のフォルダーです。画面にアドレスとポート番号が出たら、PowerShell を開いたままにします。
+
+Studio で新しいテスト用の場所を開きます。**Plugins → Rojo** を開き、PowerShell に表示された接続先を使って接続します。通常は `localhost:34872` です。Studio に変更の確認画面が出たら、内容を見てから進みます。**Explorer（エクスプローラー）** にコードやフォルダーが表示されたら、[コードを1行書いて試す](workflow.md)へ進みます。[公式の新規ゲーム作成手順](https://rojo.space/docs/v7/getting-started/new-game/)

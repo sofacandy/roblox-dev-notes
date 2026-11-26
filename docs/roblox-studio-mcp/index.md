@@ -1,6 +1,6 @@
 # Roblox Studio MCP
 
-2026年11月26日の Codex CLI では、Roblox_Studio が 41 tools と表示され、Blender MCP と同時に認識されました。このページでは接続結果を記録しています。
+Roblox Studio MCP をつなぐと、Codex に Studio の中を調べる作業などを頼めます。今回、ターミナル版の Codex では、Blender と Roblox Studio の両方のツールが表示されました。Studio 側は **41 tools** でした。
 
-- [Blender MCP との併用](../blender-mcp/faq.md)
-- [Rojo で Luau を同期する](../rojo/workflow.md)
+- [Blender と Studio の両方を使うとき](../blender-mcp/faq.md)
+- [手元で書いたコードを Studio に反映する方法](../rojo/workflow.md)

@@ -1,6 +1,7 @@
 # Codex
 
-デスクトップと CLI の両方から Blender MCP の接続を確認できます。Windows で CLI を使う場合の `npm.cmd` と `codex.cmd` は[コマンド集](../blender-mcp/commands.md)にまとめています。
+Codex は、チャットでコードの編集や制作の手助けを頼める道具です。このサイトでは、Windows のアプリで使う「デスクトップ版」と、ターミナルで使う「CLI」が出てきます。
 
-- [Blender MCP を設定する](../blender-mcp/setup.md)
-- [Codex で編集した Luau を Studio で試す](../rojo/workflow.md)
+- [Blender を Codex につなぐ](../blender-mcp/setup.md)
+- [デスクトップ版でつながらないときに CLI で試す](../blender-mcp/commands.md)
+- [Codex に頼んで書いたコードを Studio で試す](../rojo/workflow.md)

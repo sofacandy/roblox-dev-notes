@@ -1,51 +1,51 @@
-# Windows トラブルシューティング・FAQ
+# Blender MCP で困ったときは
 
-## 01. 設定画面で Blender MCP が見つからない
+自分の画面に出ている表示や、止まったところに近い項目を探してください。
 
-ローカルの stdio サーバーとして、[セットアップ](setup.md)の `[mcp_servers.blender]` を登録します。編集した設定が有効になるよう、アプリを開き直して新規チャットで確認します。
+## 01. Codex の設定画面で検索しても出てこない
 
-## 02. blender-1.0.3.mcpb はどう使う？
+[セットアップの手順3](setup.md)に沿って、メモ帳で `config.toml` に設定を追加します。保存後、Codex を完全に終了して開き直します。
 
-MCP クライアント向けバンドルです。このガイドでは Codex が uvx を使うので、バンドルの読み込みは不要です。Blender 側の待ち受けを準備する工程は使用する版の案内を確認してください。
+## 02. blender-1.0.3.mcpb をダウンロードした。どこで使う？
 
-## 03. uvx の実行後に ERROR と表示される
+MCP に対応するアプリ向けの配布ファイルです。このガイドでは Codex が `uvx` で必要なものを取りに行くので、そのファイルは使いません。Blender 側の準備は [セットアップの手順1](setup.md) を参照してください。
 
-今回、Git からのビルドと依存のインストールは進みました。その後 `ERROR` が出ましたが、詳細行が記録されておらず原因は未特定です。Blender の起動、待ち受けの所有プロセス、ホストとポート、MCP の起動ログを順に確認します。
+## 03. uvx を実行したら ERROR と出た
 
-## 04. 手動起動したら止まったように見える
+今回も、必要なファイルを取得したあとに `ERROR` が出ました。詳しい表示の記録がなく、原因は分かっていません。まず Blender が開いているかを確認し、[コマンド集](commands.md)で接続先に届くか試します。
 
-stdio サーバーは標準入力を待ち続ける場合があります。診断用の手動起動は `Ctrl+C` で終了し、Codex に起動を任せて `/mcp` で確認します。
+## 04. コマンドを実行したら画面が止まったように見える
 
-## 05. localhost で TCP の警告が出る
+橋渡し役が Codex からの入力を待っていることがあります。このやり取りは「stdio」と呼ばれます。手で起動したものは `Ctrl+C` で閉じ、Codex を開いて接続を確認します。
 
-今回、`::1:9876` は失敗し、`127.0.0.1:9876` は成功しました。IPv4 側の待ち受けが使えたため、`Test-NetConnection 127.0.0.1 -Port 9876` で再確認し、MCP の接続先も `BLENDER_MCP_HOST = "127.0.0.1"` にそろえます。
+## 05. localhost で ::1 の警告が出る
 
-## 06. チャットに Blender MCP ツールが出ない
+同じパソコンを指す名前でも、接続先に `::1` と `127.0.0.1` の2種類があります。今回届いたのは `127.0.0.1` です。PowerShell に `Test-NetConnection 127.0.0.1 -Port 9876` を入れ、`True` が出るか確認します。Codex の設定も `BLENDER_MCP_HOST = "127.0.0.1"` にそろえます。
 
-設定の読み込みとツール登録を確認します。CLI の `mcp list`、`mcp get blender`、対話中の `/mcp` を順に試し、デスクトップの新規ローカルチャットと比較します。TCP の成功とツール一覧は別々に確認できます。
+## 06. チャットで「Blender MCP ツールがない」と言われる
 
-## 07. Codex CLI が未インストール
+Blender が接続を受け付けていても、今のチャットにツールが表示されないことがあります。Codex を完全に終了し、新しいローカルチャットで試します。まだ表示されなければ、FAQ 10・11 でターミナル版と比べます。
 
-デスクトップとの比較が必要なときに導入します。Node.js を入れ、PowerShell を開き直して `npm.cmd install -g @openai/codex@latest` を実行します。今回の記録では `codex.cmd --version` が 0.172.0 でした。
+## 07. パソコンに Codex CLI が入っていない
 
-## 08. npm で PSSecurityException が発生する
+CLI はターミナルで使う版です。デスクトップ版でつまずいたときに、どちらでも同じ問題が起きるか比べられます。[コマンド集](commands.md)の手順で入れます。今回の表示は `0.172.0` でした。
 
-今回、PowerShell が `npm.ps1` を選び、実行ポリシーでブロックされました。`npm.cmd` と `codex.cmd` を使うことで、実行ポリシーを変更せずに進められました。[コマンド集](commands.md)に導入と起動の例があります。
+## 08. npm を実行すると PSSecurityException が出る
 
-## 09. CLI 起動時に Hooks の信頼確認が出る
+PowerShell が選んだ `npm.ps1` は、この環境の設定では実行できませんでした。 `npm.cmd install -g @openai/codex@latest` で入れ、起動も `codex.cmd` にします。これで PowerShell の実行ポリシーを変更せずに進められました。
 
-今回の画面には Review hooks、Trust all and continue、Continue without trusting が表示されました。接続の比較には、内容を確認していない Hooks を信頼せず、**Continue without trusting** を選びました。表示や選択肢の順番は版によって変わることがあります。
+## 09. Codex を開いたら Hooks を信頼するか聞かれた
 
-## 10. CLI で認識状況を確認したい
+Hooks は Codex の操作に合わせて自動で動く処理です。今回は接続の確認だけだったため、**Continue without trusting**（信頼せずに続ける）を選びました。ほかに **Review hooks**（内容を見る）と **Trust all and continue**（すべて信頼して続ける）が表示されました。
 
-`codex.cmd mcp list` と `codex.cmd mcp get blender` で設定を確認し、対話中の `/mcp` でセッションの接続を見ます。実測は Blender **Connected / 26 tools** でした。シーン取得はツールを実際に呼び出して確認します。
+## 10. ターミナル版で何が表示されたらいい？
 
-## 11. CLI では見えるのにデスクトップでは見えない
+PowerShell の `codex.cmd mcp list` と `codex.cmd mcp get blender` で登録を確認します。次に `codex.cmd` で Codex を開き、その入力欄で `/mcp` を実行します。今回は Blender が **Connected / 26 tools** と表示されました。最後に [シーンを読み取るテスト](setup.md)を行います。
 
-CLI では `uvx` の名前指定で認識されました。デスクトップでは当初認識できず、絶対パスに変更後、動作したようだとの報告がありました。CLI とデスクトップで PATH の見え方が異なった可能性があります。起動ログによる原因の特定と最終ツール呼び出しの確認は未実施です。
+## 11. ターミナル版では出るのにデスクトップ版では出ない
 
-`(Get-Command uvx.exe).Source` の結果を `command` に設定し、デスクトップを完全終了してからローカルの新規チャットでシーン取得を試します。
+[セットアップの手順2・3](setup.md)に沿って、`command` に `uvx.exe` の絶対パスを入れます。デスクトップ版を完全終了して、新しいローカルチャットで試します。変更後に使えたようだとの報告がありました。デスクトップ版が `uvx` を名前だけでは探せなかった可能性がありますが、原因と最終ログは未確認です。
 
-## 12. Roblox Studio MCP と同時に使える？
+## 12. Roblox Studio MCP と一緒に使える？
 
-今回の CLI では Blender（26 tools）と Roblox_Studio（41 tools）が同時に認識されました。設定テーブルはサーバーごとに管理します。Blender から Studio にモデルを移すときは、エクスポートとインポートを行います。
+今回のターミナル版では、Blender の 26 tools と Roblox_Studio の 41 tools が同時に出ました。それぞれの設定を別々に書きます。Blender で作った物を Studio で使うには、Blender からファイルに書き出し、Studio で読み込みます。

@@ -1,8 +1,12 @@
 # Rojo
 
-Rojo はファイルと Roblox Studio 内のインスタンスを対応づける開発ツールです。Luau を外部エディタで編集し、Studio のプレイテストと Git のレビューを組み合わせられます。
+Rojo を使うと、パソコンに保存したゲームのコードを Roblox Studio に反映できます。エディタで書いて保存し、Studio の **Play** で動かす、という流れです。
 
-!!! note "検証状況"
-    この章は公式 v7 ドキュメントに基づく例です。今回の Windows 環境で、CLI の導入から Studio の同期・プレイテストまでの通し検証は未実施です。
+1. [Rojo を入れて、テスト用の場所につなぐ](setup.md)
+2. [どのファイルが Studio のどこに出るか見る](project-structure.md)
+3. [コードを1行書いて、Studio で試す](workflow.md)
 
-[セットアップ](setup.md) · [プロジェクト構成](project-structure.md) · [開発ワークフロー](workflow.md) · [FAQ](faq.md)
+[困ったときは](faq.md)
+
+!!! note "試した範囲"
+    公式の Rojo v7 ガイドをもとに書いています。この Windows 環境では、インストールから Studio の動作確認まで通して試していません。

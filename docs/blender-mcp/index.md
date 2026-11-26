@@ -1,11 +1,13 @@
 # Blender MCP
 
-Windows で Blender Lab の MCP を Codex に接続する手順です。Codex は stdio で MCP サーバーを起動し、サーバーから Blender 側にはローカル TCP で接続します。
+Blender MCP を設定すると、Codex のチャットから、起動中の Blender に作業を頼めます。はじめは「今のシーンに何があるか教えて」と頼むと、モデルに手を加えず接続を確認できます。
 
-| 確認した段階 | Windows での結果 |
-| --- | --- |
-| Blender 5.3.0 の待ち受け | `127.0.0.1:9876` への TCP 接続に成功。IPv6 の `::1` は失敗 |
-| Codex CLI 0.172.0 | `/mcp` で Blender が Connected、26 tools |
-| デスクトップ | 当初はツール未認識。絶対パスに変更後、利用できたようだとの報告あり。最終ログは未確認 |
+まずは [Windows セットアップ](setup.md)へ進んでください。途中で止まったら、画面に出た表示を [FAQ](faq.md) で探せます。
 
-[セットアップ](setup.md) · [全12件のFAQ](faq.md) · [コマンド集](commands.md) · [活用例](examples.md)
+## Windows で確認できたこと
+
+- Blender 5.3.0 を開いた状態で、`127.0.0.1:9876` への接続に成功しました。`::1` では接続できませんでした。
+- ターミナル版の Codex 0.172.0 では、`/mcp` に **Connected / 26 tools** と表示されました。
+- デスクトップ版では最初はツールが出ませんでした。`uvx.exe` の場所をフルパスで指定したあとに使えたようだとの報告がありました。最後に Blender から何が返ったかはログで確認できていません。
+
+[コマンド集](commands.md) · [接続できたら試せること](examples.md)

@@ -1,19 +1,19 @@
-# Rojo FAQ
+# Rojo で困ったときは
 
-以下は公式 v7 ドキュメントをもとにした確認項目です。今回の実機検証は未実施です。
+公式の Rojo v7 ガイドをもとにした確認方法です。この Windows 環境での実機確認は未実施です。
 
-## rojo が見つからない
+## PowerShell が「rojo が見つからない」と言う
 
-`Get-Command rojo` と `rojo --version` で CLI を確認します。PATH を追加したら PowerShell を開き直します。VS Code 拡張から使える場合でも、ターミナルから呼ぶ場合は CLI の導入が必要です。
+エクスプローラーで `rojo.exe` があるフォルダーを開き、上のアドレス欄に `powershell` と入力します。開いた画面で `.\rojo.exe --version` を実行し、バージョンが出るか確認します。[セットアップ](setup.md)
 
-## Studio から接続できない
+## Studio からつながらない
 
-`rojo serve` が起動中か確認し、出力にあるホストとポートをプラグイン側で指定します。プラグインの版も確認します。CLI とプラグインの準備は[セットアップ](setup.md)を参照してください。
+Rojo を起動した PowerShell がまだ開いているか確認します。その画面に出たアドレスとポート番号を Studio の Rojo プラグインに入れます。プラグインが見つからなければ [セットアップの手順2](setup.md) に戻ります。
 
-## 保存したファイルが Studio に出てこない
+## 保存したのに Studio に出てこない
 
-サーバーを起動したディレクトリと `default.project.json` の `$path` を確認します。`.server.luau`、`.client.luau` などのファイル名によって同期後のスクリプトの種類が変わります。[プロジェクト構成](project-structure.md)
+Studio の **Explorer** を開いて、探している場所を確認します。パソコン側では `default.project.json` の `$path` が指すフォルダーに保存したかを見ます。名前の最後が `.server.luau` か `.client.luau` かによって、Studio で作られるスクリプトの種類も変わります。[ファイルの置き場所](project-structure.md)
 
-## Studio 側で変更した内容を Git に戻せる？
+## Studio で書き換えたコードはパソコンのファイルにも戻る？
 
-このワークフローではファイルを編集し、Studio に同期します。Rojo の同期対象の Luau は外部エディタで管理してください。既存プレースに導入する場合は、コピーで同期対象を確認してから進めます。[公式の移行ガイド](https://rojo.space/docs/v7/getting-started/porting-an-existing-game/)
+このガイドでは、パソコンのファイルを編集して Studio へ送ります。コードを修正するときはエディタでファイルを開いて保存します。すでに作っているゲームに Rojo を使う場合は、コピーした場所で試せます。[公式の移行ガイド](https://rojo.space/docs/v7/getting-started/porting-an-existing-game/)
