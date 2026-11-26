@@ -41,6 +41,7 @@ nav:
       - セットアップ: rojo/setup.md
       - プロジェクト構成: rojo/project-structure.md
       - 開発ワークフロー: rojo/workflow.md
+      - 実装ノート: rojo/implementation-notes.md
       - FAQ: rojo/faq.md
   - Roblox Studio MCP: roblox-studio-mcp/index.md
   - Codex: codex/index.md

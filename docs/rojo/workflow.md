@@ -2,6 +2,8 @@
 
 [セットアップ](setup.md)で練習用の `roblox-demo` を作り、Studio から Rojo に接続したあとに行います。この Windows 環境では、ここまでの流れを通して試していません。
 
+私のプロジェクトで Rojo の管理範囲をどう広げたかは、[実装ノート](implementation-notes.md)にまとめました。
+
 ## 1. 練習用のコードを保存する
 
 エディタで `roblox-demo` を開きます。`default.project.json` を開き、`ServerScriptService` の中にある `$path` を探します。その場所が、Studio でサーバー用のコードを置くフォルダーです。[このサイトの構成例](project-structure.md)では `src/server` です。
