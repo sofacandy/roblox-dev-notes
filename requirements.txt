@@ -1,0 +1,2 @@
+mkdocs-material==9.7.0
+lunr[languages]==0.8.0

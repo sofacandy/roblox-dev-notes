@@ -1,0 +1,46 @@
+site_name: Roblox Dev Notes
+site_description: Roblox制作のためのBlender MCPとRojoの日本語ガイド
+site_url: https://sofacandy.github.io/roblox-dev-notes/
+repo_url: https://github.com/sofacandy/roblox-dev-notes
+repo_name: sofacandy/roblox-dev-notes
+theme:
+  name: material
+  language: ja
+  font: false
+  palette:
+    primary: indigo
+    accent: teal
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+plugins:
+  - search:
+      lang:
+        - ja
+        - en
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+nav:
+  - ホーム: index.md
+  - Blender MCP:
+      - 概要: blender-mcp/index.md
+      - Windows セットアップ: blender-mcp/setup.md
+      - FAQ: blender-mcp/faq.md
+      - コマンド集: blender-mcp/commands.md
+      - 活用例: blender-mcp/examples.md
+  - Rojo:
+      - 概要: rojo/index.md
+      - セットアップ: rojo/setup.md
+      - プロジェクト構成: rojo/project-structure.md
+      - 開発ワークフロー: rojo/workflow.md
+      - FAQ: rojo/faq.md
+  - Roblox Studio MCP: roblox-studio-mcp/index.md
+  - Codex: codex/index.md
