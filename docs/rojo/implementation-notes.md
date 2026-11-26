@@ -52,8 +52,12 @@ ReplicatedStorage
 
 下の `default.project.json` を読むときは、まず `$path` の行を探してください。そこにパソコン側のフォルダーが書いてあります。その行を囲んでいる名前を外側から順にたどると、上の図の Studio 側の置き場所が分かります。
 
-!!! note "Studio 側にある項目を残す設定"
-    新しい設定では、親の項目に `$ignoreUnknownInstances: true` を書いています。たとえば `ServerScriptService` では、設定に含まれていない `Server` の隣の項目を同期時に残します。`Server` の内側は別で、親の指定は引き継ぎません。既定値は、その項目に `$path` があると `false`、ないと `true` です。[Rojo v7 の設定ファイル仕様](https://rojo.space/docs/v7/project-format/#instance-description)
+!!! note "Studio で手作業で追加した項目を残す"
+    たとえば、Studio で `ServerScriptService` を開くと、Rojo が作った `Server` フォルダーがあります。テスト用に `TestScript` を手作業で作り、`Server` の隣に置いたとします。
+
+    この設定では、Rojo が `src/server` の内容を `Server` に反映しても、隣の `TestScript` は残ります。`ServerScriptService` の `$ignoreUnknownInstances: true` が、「Rojo の設定にない項目も、この階層では残す」という意味だからです。
+
+    `TestScript` を `Server` の**中**に置くと話が変わります。`Server` は `$path` でパソコンのフォルダーとつながっていて、親の設定は引き継ぎません。そのため、パソコン側にない `TestScript` は同期で削除されることがあります。[Rojo v7 の設定ファイル仕様](https://rojo.space/docs/v7/project-format/#instance-description)
 
 ### 初期の設定（Lotus-Pond-Obby）
 
